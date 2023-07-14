@@ -149,5 +149,5 @@ for now generate me for {notes_topic} in {study_grade} at {curriculum_board} {in
     with open("templates/notes.html", 'w') as file:
             file.write(html_code)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
