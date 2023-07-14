@@ -1,0 +1,385 @@
+<!--
+
+=========================================================
+* Volt Pro - Premium Bootstrap 5 Dashboard
+=========================================================
+
+* Product Page: https://themesberg.com/product/admin-dashboard/volt-bootstrap-5-dashboard
+* Copyright 2021 Themesberg (https://www.themesberg.com)
+* License (https://themesberg.com/licensing)
+
+* Designed and coded by https://themesberg.com
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. Please contact us to request a removal.
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Primary Meta Tags -->
+    <title>Generate Notes - Notely</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon-32x32.png">
+
+    <!-- Sweet Alert -->
+    <link type="text/css" href="/css/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <!-- Notyf -->
+    <link type="text/css" href="/css/vendor/notyf/notyf.min.css" rel="stylesheet">
+
+    <!-- Volt CSS -->
+    <link type="text/css" href="/css/volt.css" rel="stylesheet">
+    <link type="text/css" href="/css/style.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+    <script src="http://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"></script>
+
+    <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
+
+    <!-- <script type="text/javascript">\n(function(f,b){if(!b.__SV){var e,g,i,h;window.mixpanel=b;b._i=[];b.init=function(e,f,c){function g(a,d){var b=d.split(\".\");2==b.length&&(a=a[b[0]],d=b[1]);a[d]=function(){a.push([d].concat(Array.prototype.slice.call(arguments,0)))}}var a=b;\"undefined\"!==typeof c?a=b[c]=[]:c=\"mixpanel\";a.people=a.people||[];a.toString=function(a){var d=\"mixpanel\";\"mixpanel\"!==c&&(d+=\".\"+c);a||(d+=\" (stub)\");return d};a.people.toString=function(){return a.toString(1)+\".people (stub)\"};i=\"disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove\".split(\" \");\nfor(h=0;h<i.length;h++)g(a,i[h]);var j=\"set set_once union unset remove delete\".split(\" \");a.get_group=function(){function b(c){d[c]=function(){call2_args=arguments;call2=[c].concat(Array.prototype.slice.call(call2_args,0));a.push([e,call2])}}for(var d={},e=[\"get_group\"].concat(Array.prototype.slice.call(arguments,0)),c=0;c<j.length;c++)b(j[c]);return d};b._i.push([e,f,c])};b.__SV=1.2;e=f.createElement(\"script\");e.type=\"text/javascript\";e.async=!0;e.src=\"undefined\"!==typeof MIXPANEL_CUSTOM_LIB_URL?\nMIXPANEL_CUSTOM_LIB_URL:\"file:\"===f.location.protocol&&\"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js\".match(/^\\/\\//)?\"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js\":\"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js\";g=f.getElementsByTagName(\"script\")[0];g.parentNode.insertBefore(e,g)}})(document,window.mixpanel||[]);\n</script> -->
+
+</head>
+
+<!-- Google tag (gtag.js) -->
+
+<body>
+
+    <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
+
+    <nav class="navbar navbar-dark bg-black navbar-theme-primary px-4 col-12 d-lg-none">
+        <a class="navbar-brand me-lg-5" href="/">
+            <img class="navbar-brand-dark" src="css/logotransparent.png" alt="Volt logo" />
+            <img class="navbar-brand-light" src="css/logotransparent.png" alt="Volt logo" />
+        </a>
+        <div class="d-flex align-items-center">
+            <button class="navbar-toggler d-lg-none collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+    <nav id="sidebarMenu" class="sidebar d-lg-block bg-black text-white collapse" data-simplebar>
+        <div class="sidebar-inner px-4 pt-3">
+            <div
+                class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
+                <div class="collapse-close d-md-none">
+                    <a href="#sidebarMenu" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
+                        aria-controls="sidebarMenu" aria-expanded="true" aria-label="Toggle navigation">
+                        <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <ul class="nav flex-column pt-3 pt-md-0">
+                <li class="nav-item">
+                    <a href="/" class="nav-link d-flex align-items-center">
+                        <!-- <span class="sidebar-icon">
+                            <img src="css/logotransparent.png" height="35" width="35" alt="">
+                        </span> -->
+                        <span id="titleapp" class="sidebar-text mt-2 h2 font-pacifico" style="color: rgb(255, 255, 255);">notely</span>
+                    </a>
+                </li>
+                <li role="separator" class="dropdown-divider mt-2 mb-3 border-gray-700"></li>
+                <li class="nav-item ">
+                    <a href="/intro" class="nav-link">
+                        <span class="sidebar-icon">
+                            <i class="bi bi-journal-bookmark-fill"></i>
+                        </span>
+                        <span class="sidebar-text">Generate - Notes</span>
+                    </a>
+                </li>
+                <li role="separator" class="dropdown-divider mt-3 mb-3 border-gray-700"></li>
+                <li class="nav-item">
+                    <a href="https://tally.so/r/wb99j6" target="_blank" class="nav-link d-flex align-items-center">
+                        <span class="sidebar-icon">
+                            <i class="bi bi-people-fill"></i>
+                        </span>
+                        <span class="sidebar-text">Contact Us</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://tally.so/r/wb99j6" target="_blank" class="nav-link d-flex align-items-center">
+                        <span class="sidebar-icon">
+                            <i class="bi bi-building"></i>
+                        </span>
+                        <span class="sidebar-text">About Us</span>
+                    </a>
+                </li>
+                <li role="separator" class="dropdown-divider mt-3 mb-3 border-gray-700"></li>
+                <li class="nav-item">
+                    <a href="https://www.instagram.com/universis.app/" target="_blank"
+                        class="nav-link d-flex align-items-center">
+                        <span class="sidebar-icon">
+                            <i class="bi bi-question-circle-fill"></i>
+                        </span>
+                        <span class="sidebar-text">Walkthrough</span>
+                    </a>
+                </li>
+                
+                <!-- <p class="mt-3 mb-2"><small>In collaboration with:</small></p>
+                <li class="nav-item">
+                    <a href="https://globaltree.in" target="_blank"
+                        class="btn btn-primary d-flex align-items-center justify-content-center">
+                        <span>Global Tree</span>
+                    </a>
+                </li> -->
+            </ul>
+        </div>
+    </nav>
+
+    <main class="content pb-md-5">
+
+        <div class="row justify-content-center mt-md-5">
+            <div class="col-12 col-lg-10">
+                    <h2 class="my-4 display-3 fw-black font-sans">
+                        Write your class notes‎ 🖊📚 ‎ with  ‎ 
+                        <span class="sidebar-text mt-2 h1 font-pacifico fw-bold" style="color: rgb(0, 0, 0); display: inline;">notely</span>
+                    </h2>
+
+                    <p>‎</p>
+                    <form action="/generate-notes" method="post" class="mt-5">
+                    <div class="form-group mb-4">
+                        <label class="my-1 me-2 small-label" for="plan">Which board are you studying in?</label>
+                        <select class="form-select" id="plan" name="curriculum_board">
+                            <option value="SSC">SSC (Secondary School Certificate)</option>
+                            <option value="CBSE">CBSE (Central Board of Secondary Education)</option>
+                            <option value="ICSE">ICSE (Indian Certificate of Secondary Education)</option>
+                            <option value="IGCSE">IGCSE (International General Certificate of Secondary Education)</option>
+                            <option value="IB">IB (International Baccalaureate)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="my-1 me-2 small-label" for="plan">Which Indian state are you studying in?</label>
+                        <select class="form-select" id="plan" name="indian_state">
+                            <option value="Telangana">Telangana</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="West Bengal">West Bengal</option>
+                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                            <option value="Chandigarh">Chandigarh</option>
+                            <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Ladakh">Ladakh</option>
+                            <option value="Lakshadweep">Lakshadweep</option>
+                            <option value="Puducherry">Puducherry</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="my-1 me-2 small-label" for="plan">Which grade are you studying in?</label>
+                        <select class="form-select" id="plan" name="study_grade">
+                            <option value="6th">6th grade</option>
+                            <option value="7th">7th grade</option>
+                            <option value="8th">8th grade</option>
+                            <option value="9th">9th grade</option>
+                            <option value="10th">10th grade</option>
+                            <option value="11th">11th grade or Intermediate - 1st year</option>
+                            <option value="12th">12th grade or Intermediare - 2nd year</option>
+                        </select>
+                    </div>
+
+                    
+                    <div class="form-group purple-border">
+                        <label class="my-1 me-2 small-label" for="plan">Please specify the topic and subject you'll be needing notes for!</label>
+                        <textarea class="form-select form-control" id="exampleFormControlTextarea4" name="notes-topic" rows="3"></textarea>
+                    </div>
+
+                    <p>‎</p>
+
+                    <button type="submit" class="btn btn-primary inline">Write me Notes!</button>
+                </form>
+                <form action="/notes" method="get" class="mt-5">
+                    {% if notes_there %}
+                    <button type="button" style="background-color: rgb(130, 35, 218);" class="btn btn-primary inline">Show my Notes!</button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+
+        <style>
+            .inline {
+   display:inline-block;
+   margin-right:5px;
+}
+        </style>
+
+        <style>
+            .small-label {
+                font-size: 0.875rem; /* Adjust the font size as per your preference */
+            }
+        </style>
+
+        <style>
+        
+            .form-select {
+                width: 500px; /* Adjust the width as per your preference */
+            }
+        </style>
+        </main>
+        <!-- <div class="form-group mb-4">
+            <label class="my-1 me-2" for="plan">Wanna study</label>
+            <select class="form-select" id="plan" name="study">
+                <option value="Undergraduate">Undergraduate</option>
+                <option value="Graduate">Graduate</option>
+            </select>
+        </div> -->
+
+        <!--        <h1 class="h4 text-bold mt-4 mb-3">AI Chat:</h1>
+
+
+                <div class="card bg-gray-800 text-white border-0 shadow p-4 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2"><span class="font-small"><a
+                                href="#"><img class="avatar-sm img-fluid rounded-circle me-2"
+                                    src="/css/logotransparent.png" alt="avatar"> <span class="fw-bold">Universis</span>
+                            </a></span>
+
+                    </div>
+                    <p class="m-0">Hello! I'd be happy to help you with any questions you have about
+                        college. To get started, can you tell me a little bit about your grades,
+                        interests, extracurricular activities, and preferences? This will help me pick colleges for you.
+                    </p>
+                </div>
+
+                <!-- Don't remove this (frontend stuff) -->
+                <!-- <d -->
+
+    <!-- <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyC48b7UBj4vvzs0YWugHT6EYES3XvAdxUk",
+          authDomain: "universisapp.firebaseapp.com",
+          projectId: "universisapp",
+          storageBucket: "universisapp.appspot.com",
+          messagingSenderId: "248775322821",
+          appId: "1:248775322821:web:ec02b9d5642f79021694ac",
+          measurementId: "G-V5R2J82XJC"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+      </script> -->
+
+    <!-- <script>
+        mixpanel.init('d0ed4a5cb1e55ca5a6b8ca8891cea9d0', { debug: true });
+
+        mixpanel.identify("example@example.com")
+
+        mixpanel.track('Started Chatting', {
+            'message': document.getElementById("input-message").value
+        })
+    </script> -->
+
+    <script>
+        function autoScrolling() {
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+
+        // document.addEventListener("DOMContentLoaded", () => {
+        //     setTimeout(autoScrolling, 200);
+        // })
+
+        const ideaMoreLoader = document.getElementById('more-loader')
+        const displayFrontendMessage = document.getElementById('message-frontend')
+        const displayActualText = document.getElementById('message-text')
+
+        function showLoaderMore() {
+            ideaMoreLoader.classList.remove('d-none')
+            displayFrontendMessage.classList.remove('d-none')
+            displayActualText.innerText = document.getElementById("input-message").value
+
+            // setTimeout(autoScrolling, 500);
+        }
+    </script> 
+
+    <!-- Core -->
+    <script src="/css/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="/css/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Vendor JS -->
+    <script src="/css/vendor/onscreen/dist/on-screen.umd.min.js"></script>
+
+    <!-- Slider -->
+    <script src="/css/vendor/nouislider/distribute/nouislider.min.js"></script>
+
+    <!-- Smooth scroll -->
+    <script src="/css/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+
+    <!-- Charts -->
+    <script src="/css/vendor/chartist/dist/chartist.min.js"></script>
+    <script src="/css/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+
+    <!-- Datepicker -->
+    <script src="/css/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
+
+    <!-- Sweet Alerts 2 -->
+    <script src="/css/vendor/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
+    <!-- Moment JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+
+    <!-- Vanilla JS Datepicker -->
+    <script src="/css/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
+
+    <!-- Notyf -->
+    <script src="/css/vendor/notyf/notyf.min.js"></script>
+
+    <!-- Simplebar -->
+    <script src="/css/vendor/simplebar/dist/simplebar.min.js"></script>
+
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <!-- Volt JS -->
+    <script src="./css/js/volt.js"></script>
+
+
+</body>
+
+</html>
