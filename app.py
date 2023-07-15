@@ -1,11 +1,16 @@
 import os
 import openai
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, send_from_directory
 from pip._vendor import cachecontrol
 
 app = Flask("Notely", template_folder='./templates', static_folder='./css')
 
 openai.api_key = "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"
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, '/css/favicon/'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route("/", methods=['GET', 'POST'])
 def index():

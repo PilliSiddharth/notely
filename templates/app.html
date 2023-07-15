@@ -48,9 +48,8 @@
 
 <!-- Google tag (gtag.js) -->
 
-<body>
-
-    <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
+<body style="background: rgb(229,212,255);
+background: radial-gradient(circle, rgba(229,212,255,1) 0%, rgba(255,249,239,1) 59%);" >
 
     <nav class="navbar navbar-dark bg-black navbar-theme-primary px-4 col-12 d-lg-none">
         <a class="navbar-brand me-lg-5" href="/">
@@ -95,7 +94,7 @@
                 </li>
                 <li role="separator" class="dropdown-divider mt-2 mb-3 border-gray-700"></li>
                 <li class="nav-item ">
-                    <a href="/intro" class="nav-link">
+                    <a href="/generate-notes" class="nav-link">
                         <span class="sidebar-icon">
                             <i class="bi bi-journal-bookmark-fill"></i>
                         </span>
@@ -104,7 +103,7 @@
                 </li>
                 <li role="separator" class="dropdown-divider mt-3 mb-3 border-gray-700"></li>
                 <li class="nav-item">
-                    <a href="https://tally.so/r/wb99j6" target="_blank" class="nav-link d-flex align-items-center">
+                    <a href="https://tally.so/r/wLz8KO" target="_blank" class="nav-link d-flex align-items-center">
                         <span class="sidebar-icon">
                             <i class="bi bi-people-fill"></i>
                         </span>
@@ -112,7 +111,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="https://tally.so/r/wb99j6" target="_blank" class="nav-link d-flex align-items-center">
+                    <a href="/about-us" target="_blank" class="nav-link d-flex align-items-center">
                         <span class="sidebar-icon">
                             <i class="bi bi-building"></i>
                         </span>
@@ -121,7 +120,7 @@
                 </li>
                 <li role="separator" class="dropdown-divider mt-3 mb-3 border-gray-700"></li>
                 <li class="nav-item">
-                    <a href="https://www.instagram.com/universis.app/" target="_blank"
+                    <a href="/" target="_blank"
                         class="nav-link d-flex align-items-center">
                         <span class="sidebar-icon">
                             <i class="bi bi-question-circle-fill"></i>
@@ -226,12 +225,14 @@
                     <p>‎</p>
 
                     <button type="submit" class="btn btn-primary inline">Write me Notes!</button>
-                </form>
-                <form action="/notes" method="get" class="mt-5">
                     {% if notes_there %}
-                    <button type="button" style="background-color: rgb(130, 35, 218);" class="btn btn-primary inline">Show my Notes!</button>
+                    <a href="/notes">
+                        <button type="button" style="background-color: rgb(130, 35, 218);" class="btn btn-primary inline">Show my Notes!</button>
+                    </a>
                     {% endif %}
                 </form>
+
+                        
             </div>
         </div>
 
