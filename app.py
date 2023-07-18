@@ -1,11 +1,15 @@
 import os
+import uuid
 import openai
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, request, render_template, send_from_directory, render_template_string
 from pip._vendor import cachecontrol
 
 app = Flask("Notely", template_folder='./templates', static_folder='./css')
 
 openai.api_key = "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"
+
+# Dictionary to store the generated notes content
+notes_data = {}
 
 @app.route('/favicon.ico')
 def favicon():
@@ -29,24 +33,33 @@ def render_notes():
         study_grade = request.form.get('study_grade')
         notes_topic = request.form['notes-topic']
 
-        # tokens_trial -= 1  # Deduct one token
+        # Generate a unique identifier (UUID) for the user
+        user_id = str(uuid.uuid4())
 
         notes_html = generate_notes(curriculum_board=curriculum_board, indian_state=indian_state, study_grade=study_grade, notes_topic=notes_topic)
 
-        return render_template('app.html', notes_there=True)
+        # Store the generated notes content in the dictionary with user_id as the key
+        notes_data[user_id] = notes_html
+
+        return render_template('app.html', notes_there=True, user_id=user_id, loader=True)
     else:
         return render_template('app.html')
     
 
-@app.route("/notes", methods=['GET', 'POST'])
-def generated_notes():
-    return render_template('notes.html')
-
-
+@app.route("/notes/<user_id>", methods=['GET', 'POST'])
+def generated_notes(user_id):
+    # Check if the user_id exists in the dictionary
+    if user_id in notes_data:
+        # Retrieve the notes content from the dictionary
+        notes_html = notes_data[user_id]
+        return render_template_string(notes_html)
+    else:
+        # If the user_id doesn't exist, return an error message or redirect to a different page
+        return "Notes not found."
 
 
 def generate_notes(curriculum_board, indian_state, study_grade, notes_topic):
-    # Custom prompt
+    
     prompt = f'''
 You are notely, you can generate detailed and brief and very long and very simple to understand the class notes for students in 10th, 11th, and 12th grade for any chapter of a subject out there. This app is mainly targeted for students in India whose syllabus can be consisted of curriculum ranging from SSC, CBSE, ICSE, or IB. The generated notes should contain in a format of having synopsis, important points to remember, definitions, all formulas, 5 or more example problems solved with step by step explanation of it (the problems should be in right text formatting mathematically or not).
 You have to now makes this class notes in a nice html format with a bunch of tags to make it get a class notes feel and make it in bootstrap, also make any mathermatical symbol formatted in HTML with improved mathematical formatting using MathJax and Bootstrap.
@@ -151,9 +164,13 @@ for now generate me for {notes_topic} in {study_grade} at {curriculum_board} {in
     )
     html_code = response.choices[0].text.strip()
 
-    with open("templates/notes.html", 'w') as file:
-            file.write(html_code)
+    # ... (your existing code for generating the notes HTML)
+
+    # with open(f"templates/notes/{filename}", 'w') as file:
+    #     file.write(html_code)
+
+    # Return the filename so it can be used in the "generated_notes" route
+    return html_code
 
 if __name__ == '__main__':
     app.run(debug=True)
-  #db

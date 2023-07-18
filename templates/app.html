@@ -51,10 +51,42 @@
 <body style="background: rgb(229,212,255);
 background: radial-gradient(circle, rgba(229,212,255,1) 0%, rgba(255,249,239,1) 59%);" >
 
+
+
+<style>
+    /* Loader Styles */
+    .loader-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+    }
+
+    .loader {
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top: 4px solid #3498db;
+        width: 40px;
+        height: 40px;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+
     <nav class="navbar navbar-dark bg-black navbar-theme-primary px-4 col-12 d-lg-none">
         <a class="navbar-brand me-lg-5" href="/">
-            <img class="navbar-brand-dark" src="css/logotransparent.png" alt="Volt logo" />
-            <img class="navbar-brand-light" src="css/logotransparent.png" alt="Volt logo" />
+            <!-- <img class="navbar-brand-dark" src="css/logotransparent.png" alt="Volt logo" /> -->
+            <!-- <img class="navbar-brand-light" src="css/logotransparent.png" alt="Volt logo" /> -->
         </a>
         <div class="d-flex align-items-center">
             <button class="navbar-toggler d-lg-none collapsed" type="button" data-bs-toggle="collapse"
@@ -224,9 +256,9 @@ background: radial-gradient(circle, rgba(229,212,255,1) 0%, rgba(255,249,239,1) 
 
                     <p>‎</p>
 
-                    <button type="submit" class="btn btn-primary inline">Write me Notes!</button>
+                    <button type="submit" id="submitButton" class="btn btn-primary inline" >Write me Notes!</button>
                     {% if notes_there %}
-                    <a href="/notes">
+                    <a href="/notes/{{ user_id }}">
                         <button type="button" style="background-color: rgb(130, 35, 218);" class="btn btn-primary inline">Show my Notes!</button>
                     </a>
                     {% endif %}
@@ -317,7 +349,18 @@ background: radial-gradient(circle, rgba(229,212,255,1) 0%, rgba(255,249,239,1) 
         })
     </script> -->
 
-    <script>
+
+    
+    
+    <!-- ... Your HTML code ... -->
+   
+    
+    
+    
+    
+    
+    
+    <!-- <script>
         function autoScrolling() {
             window.scrollTo(0, document.body.scrollHeight);
         }
@@ -337,7 +380,7 @@ background: radial-gradient(circle, rgba(229,212,255,1) 0%, rgba(255,249,239,1) 
 
             // setTimeout(autoScrolling, 500);
         }
-    </script> 
+    </script>  -->
 
     <!-- Core -->
     <script src="/css/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
