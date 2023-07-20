@@ -39,6 +39,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
     <script src="http://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
@@ -50,6 +52,10 @@
 
 <body style="background: rgb(229,212,255);
 background: radial-gradient(circle, rgba(229,212,255,1) 0%, rgba(255,249,239,1) 59%);" >
+
+<!-- <div id="loader" class="loader-container">
+    <div class="loader"></div>
+</div> -->
 
 
 
@@ -182,7 +188,8 @@ background: radial-gradient(circle, rgba(229,212,255,1) 0%, rgba(255,249,239,1) 
                     </h2>
 
                     <p>‎</p>
-                    <form action="/generate-notes" method="post" class="mt-5">
+                    <form id="notesForm" action="/generate-notes" method="post" class="mt-5" onsubmit="showLoaderMore()">
+                        
                     <div class="form-group mb-4">
                         <label class="my-1 me-2 small-label" for="plan">Which board are you studying in?</label>
                         <select class="form-select" id="plan" name="curriculum_board">
@@ -263,6 +270,13 @@ background: radial-gradient(circle, rgba(229,212,255,1) 0%, rgba(255,249,239,1) 
                     </a>
                     {% endif %}
                 </form>
+                <div class="alert alert-info mt-3 text-center d-none" id="more-loader">
+                    <div class="spinner-border text-info mt-2" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="h5 mb-2 text-info">Generating your notes, this may take a few seconds...</p>
+
+                </div>
 
                         
             </div>
@@ -288,6 +302,16 @@ background: radial-gradient(circle, rgba(229,212,255,1) 0%, rgba(255,249,239,1) 
             }
         </style>
         </main>
+
+        <script>
+            const ideaMoreLoader = document.getElementById('more-loader')
+    
+            function showLoaderMore() {
+                ideaMoreLoader.classList.remove('d-none')
+                document.body.scrollTop = 0; // For Safari
+                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            }
+        </script>
         <!-- <div class="form-group mb-4">
             <label class="my-1 me-2" for="plan">Wanna study</label>
             <select class="form-select" id="plan" name="study">
