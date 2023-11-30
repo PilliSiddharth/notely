@@ -169,7 +169,7 @@ background: radial-gradient(circle, rgba(229,212,255,1) 0%, rgba(255,249,239,1) 
                         <span class="sidebar-icon">
                             <i class="bi bi-building"></i>
                         </span>
-                        <span class="sidebar-text">About Us</span>  
+                        <span class="sidebar-text">About Us</span>
                     </a>
                 </li>
                 <li role="separator" class="dropdown-divider mt-3 mb-3 border-gray-700"></li>
@@ -199,12 +199,12 @@ background: radial-gradient(circle, rgba(229,212,255,1) 0%, rgba(255,249,239,1) 
         <div class="row justify-content-center mt-md-5">
             <div class="col-12 col-lg-10">
                     <h2 class="my-4 display-3 fw-black font-sans">
-                        Write your class notes‎ 🖊📚 ‎ with  ‎ 
+                        Generate your learning timetable‎ 🖊📚 ‎ with  ‎ 
                         <span class="sidebar-text mt-2 h1 font-pacifico fw-bold" style="color: rgb(0, 0, 0); display: inline;">notely</span>
                     </h2>
 
                     <p>‎</p>
-                    <form id="notesForm" action="/generate-notes" method="post" class="mt-5" onsubmit="showLoaderMore()">
+                    <form id="notesForm" action="/lesson-scheduler" method="post" class="mt-5" onsubmit="showLoaderMore()">
                         
                     <div class="form-group mb-4">
                         <label class="my-1 me-2 small-label" for="plan">Which board are you studying in?</label>
@@ -273,16 +273,16 @@ background: radial-gradient(circle, rgba(229,212,255,1) 0%, rgba(255,249,239,1) 
 
                     
                     <div class="form-group purple-border">
-                        <label class="my-1 me-2 small-label" for="plan">Please specify the topic and subject you'll be needing notes for!</label>
+                        <label class="my-1 me-2 small-label" for="plan">Please specify the topic and subject you'll be needing a timetable for!</label>
                         <textarea class="form-select form-control" id="exampleFormControlTextarea4" name="notes-topic" rows="3"></textarea>
                     </div>
 
                     <p>‎</p>
 
-                    <button type="submit" id="submitButton" class="btn btn-primary inline" >Write me Notes!</button>
+                    <button type="submit" id="submitButton" class="btn btn-primary inline" >Make me Timetable!</button>
                     {% if notes_there %}
-                    <a href="/notes/{{ user_id }}">
-                        <button type="button" style="background-color: rgb(130, 35, 218);" class="btn btn-primary inline">Show my Notes!</button>
+                    <a href="/timetables/{{ user_id }}">
+                        <button type="button" style="background-color: rgb(130, 35, 218);" class="btn btn-primary inline">Show my Timetable!</button>
                     </a>
                     {% endif %}
                 </form>
@@ -290,7 +290,7 @@ background: radial-gradient(circle, rgba(229,212,255,1) 0%, rgba(255,249,239,1) 
                     <div class="spinner-border text-info mt-2" style="width: 3rem; height: 3rem;" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div>
-                    <p class="h5 mb-2 text-info">Generating your notes, this may take a few seconds...</p>
+                    <p class="h5 mb-2 text-info">Generating your timetable, this may take a few seconds...</p>
 
                 </div>
 

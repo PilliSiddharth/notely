@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematics Workshop Timetable</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Mathematics Workshop Timetable</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Topic</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3">Day 1</td>
+                    <td>10:00 AM - 11:30 AM</td>
+                    <td>Session 1: Introduction to Limits and Continuity</td>
+                </tr>
+                <tr>
+                    <td>11:45 AM - 01:15 PM</td>
+                    <td>Session 2: Definition of Derivatives and First Principles</td>
+                </tr>
+                <tr>
+                    <td>02:00 PM - 04:30 PM</td>
+                    <td>Session 3: Techniques of Differentiation - Power Rule, Product Rule, Quotient Rule</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">Day 2</td>
+                    <td>10:00 AM - 11:30 AM</td>
+                    <td>Session 4: Derivatives of Trigonometric Functions and their Inverses</td>
+                </tr>
+                <tr>
+                    <td>11:45 AM - 01:15 PM</td>
+                    <td>Session 5: Derivatives of Exponential and Logarithmic Functions</td>
+                </tr>
+                <tr>
+                    <td>02:00 PM - 04:30 PM</td>
+                    <td>Session 6: Chain Rule, Implicit Differentiation, and Logarithmic Differentiation</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">Day 3</td>
+                    <td>10:00 AM - 11:30 AM</td>
+                    <td>Session 7: Applications of Derivatives - Related Rates and Optimization</td>
+                </tr>
+                <tr>
+                    <td>11:45 AM - 01:30 PM</td>
+                    <td>Session 8: Applications of Derivatives - Curve Sketching and L'Hôpital's Rule</td>
+                </tr>
+                <tr>
+                    <td>02:30 PM - 04:00 PM</td>
+                    <td>Session 9: Review, Practice, and Q&A</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button class="btn btn-primary mt-3" onclick="downloadPDF()">Download Timetable (PDF)</button>
+
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+
+    <script>
+        // Function to download the timetable as a PDF
+        function downloadPDF() {
+            const element = document.querySelector('.container');
+            html2pdf(element);
+        }
+    </script>
+</body>
+</html>

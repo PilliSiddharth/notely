@@ -1,15 +1,17 @@
 import os
 import uuid
 import openai
+from markupsafe import Markup
 from flask import Flask, request, render_template, send_from_directory, render_template_string
 from pip._vendor import cachecontrol
 
 app = Flask("Notely", template_folder='./templates', static_folder='./css')
 
-openai.api_key = "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"
+openai.api_key = "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"
 
 # Dictionary to store the generated notes content
 notes_data = {}
+timetable_data = {}
 
 @app.route('/favicon.ico')
 def favicon():
@@ -44,6 +46,71 @@ def render_notes():
         return render_template('app.html', notes_there=True, user_id=user_id, loader=True)
     else:
         return render_template('app.html')
+    
+
+@app.route('/jee-simplify')
+def jee_simplify_render():
+    return render_template('jee_simplify.html', question=None, options=None, answer=None)
+
+
+@app.route('/jee-simplify-post', methods=['POST'])
+def jee_simplify():
+    # Retrieve user input
+    question = request.form['question']
+    options = request.form['options'].split(',')
+
+    prompt = f'''
+You are notely, you can solve jee mains questions for any subject on maths, physics, and chemsitry and give the
+option for which is the correct answer also you shoul give a brief solution on how you solved the question, basically 
+explain like it were a 5th grade student you were explaining to and like i said the solution
+should be so easy that even a 5th grade student should understand but make it long and use real 
+life examples, make sure when you use any mathematical equations
+have them in latex,
+
+for now solve me for the question {question}, and these are the options: {options}
+'''
+
+    response = openai.Completion.create(
+        engine='text-davinci-003',
+        prompt=prompt,
+        max_tokens=2000,
+        temperature=0.5,
+        top_p=1.0,
+        n=1,
+        stop=None,
+        timeout=10
+    )
+    raw_answer = response.choices[0].text.strip()
+    answer = Markup(raw_answer.replace('\n', '<br>'))
+
+
+    # Perform AI logic here (replace with your actual AI logic)
+    # For now, just return a dummy answer
+    # answer = "Dummy Answer"
+
+    return render_template('jee_simplify.html', question=question, options=options, answer=answer)
+    
+
+@app.route("/lesson-scheduler", methods=['GET', 'POST'])
+def render_scheduler():
+    if request.method == 'POST':
+
+        curriculum_board = request.form.get('curriculum_board')
+        indian_state = request.form.get('indian_state')
+        study_grade = request.form.get('study_grade')
+        notes_topic = request.form['notes-topic']
+
+        # Generate a unique identifier (UUID) for the user
+        user_id = str(uuid.uuid4())
+
+        timetable_html = generate_timetable(curriculum_board=curriculum_board, indian_state=indian_state, study_grade=study_grade, notes_topic=notes_topic)
+
+        # Store the generated notes content in the dictionary with user_id as the key
+        timetable_data[user_id] = timetable_html
+
+        return render_template('learn_scheduler.html', notes_there=True, user_id=user_id, loader=True)
+    else:
+        return render_template('learn_scheduler.html')
     
 
 @app.route("/notes/<user_id>", methods=['GET', 'POST'])
@@ -150,6 +217,135 @@ Only do the necessary prompt and return me the necessary code, with nothing else
 
 
 for now generate me for {notes_topic} in {study_grade} at {curriculum_board} {indian_state}
+'''
+
+    response = openai.Completion.create(
+        engine='text-davinci-003',
+        prompt=prompt,
+        max_tokens=2000,
+        temperature=0.5,
+        top_p=1.0,
+        n=1,
+        stop=None,
+        timeout=10
+    )
+    html_code = response.choices[0].text.strip()
+
+    # ... (your existing code for generating the notes HTML)
+
+    # with open(f"templates/notes/{filename}", 'w') as file:
+    #     file.write(html_code)
+
+    # Return the filename so it can be used in the "generated_notes" route
+    return html_code
+
+
+@app.route("/timetables/<user_id>", methods=['GET', 'POST'])
+def generated_timetable(user_id):
+    # Check if the user_id exists in the dictionary
+    if user_id in timetable_data:
+        # Retrieve the notes content from the dictionary
+        timetable_html = timetable_data[user_id]
+        return render_template_string(timetable_html)
+    else:
+        # If the user_id doesn't exist, return an error message or redirect to a different page
+        return "Notes not found."
+
+
+def generate_timetable(curriculum_board, indian_state, study_grade, notes_topic):
+    
+    prompt = f'''
+You are notely, you can generate detailed and brief timetable that will help,
+students to complete a chapter also make the topics indepth like everything, which means in a chapter every concept
+and topic doesn't matter if its a sub topic or not with specific timeframes 
+needed for each one and the entierty of time make
+ you can make it yourself based on how much time is needed to get better in it
+   use this html code template and change the necessary content needed: 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematics Workshop Timetable</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Mathematics Workshop Timetable</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Topic</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3">Day 1</td>
+                    <td>10:00 AM - 11:30 AM</td>
+                    <td>Session 1: Introduction to Limits and Continuity</td>
+                </tr>
+                <tr>
+                    <td>11:45 AM - 01:15 PM</td>
+                    <td>Session 2: Definition of Derivatives and First Principles</td>
+                </tr>
+                <tr>
+                    <td>02:00 PM - 04:30 PM</td>
+                    <td>Session 3: Techniques of Differentiation - Power Rule, Product Rule, Quotient Rule</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">Day 2</td>
+                    <td>10:00 AM - 11:30 AM</td>
+                    <td>Session 4: Derivatives of Trigonometric Functions and their Inverses</td>
+                </tr>
+                <tr>
+                    <td>11:45 AM - 01:15 PM</td>
+                    <td>Session 5: Derivatives of Exponential and Logarithmic Functions</td>
+                </tr>
+                <tr>
+                    <td>02:00 PM - 04:30 PM</td>
+                    <td>Session 6: Chain Rule, Implicit Differentiation, and Logarithmic Differentiation</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">Day 3</td>
+                    <td>10:00 AM - 11:30 AM</td>
+                    <td>Session 7: Applications of Derivatives - Related Rates and Optimization</td>
+                </tr>
+                <tr>
+                    <td>11:45 AM - 01:30 PM</td>
+                    <td>Session 8: Applications of Derivatives - Curve Sketching and L'Hôpital's Rule</td>
+                </tr>
+                <tr>
+                    <td>02:30 PM - 04:00 PM</td>
+                    <td>Session 9: Review, Practice, and Q&A</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+
+    <script>
+        // Function to download the timetable as a PDF
+       
+    </script>
+</body>
+</html>
+```
+
+
+for now generate me timetable for {notes_topic} in {study_grade} at {curriculum_board} {indian_state}
 '''
 
     response = openai.Completion.create(
