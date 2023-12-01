@@ -89,7 +89,50 @@ for now solve me for the question {question}, and these are the options: {option
     # answer = "Dummy Answer"
 
     return render_template('jee_simplify.html', question=question, options=options, answer=answer)
-    
+
+
+@app.route('/neet-simplify')
+def neet_simplify_render():
+    return render_template('neet_simplify.html', question=None, options=None, answer=None)
+
+
+@app.route('/neet-simplify-post', methods=['POST'])
+def neet_simplify():
+    # Retrieve user input
+    question = request.form['question']
+    options = request.form['options'].split(',')
+
+    prompt = f'''
+You are notely, you can solve neet questions for any subject on biology, physics, and chemsitry and give the
+option for which is the correct answer also you shoul give a brief solution on how you solved the question, basically 
+explain like it were a 5th grade student you were explaining to and like i said the solution
+should be so easy that even a 5th grade student should understand but make it long and use real 
+life examples, make sure when you use any mathematical equations
+have them in latex,
+
+for now solve me for the question {question}, and these are the options: {options}
+'''
+
+    response = openai.Completion.create(
+        engine='text-davinci-003',
+        prompt=prompt,
+        max_tokens=2000,
+        temperature=0.5,
+        top_p=1.0,
+        n=1,
+        stop=None,
+        timeout=10
+    )
+    raw_answer = response.choices[0].text.strip()
+    answer = Markup(raw_answer.replace('\n', '<br>'))
+
+
+    # Perform AI logic here (replace with your actual AI logic)
+    # For now, just return a dummy answer
+    # answer = "Dummy Answer"
+
+    return render_template('neet_simplify.html', question=question, options=options, answer=answer)
+
 
 @app.route("/lesson-scheduler", methods=['GET', 'POST'])
 def render_scheduler():
